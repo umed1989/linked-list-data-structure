@@ -82,7 +82,7 @@ class LinkedList {
 
     let previous = this.head;
     let node = this.head.next;
-    //as long as Node has "next" property, whick means indicating the next Node
+    //as long as Node has "next" property is true
     while (node.next) {
       //assign the previous Node to the next one
       previous = node;
