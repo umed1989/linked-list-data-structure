@@ -62,10 +62,11 @@ class LinkedList {
   }
   //remove first node
   removeFirst() {
+    //if there is not head property
     if (!this.head) {
       return;
     }
-
+    //return the second Node
     return this.head.next;
   }
   //remove the last node
@@ -73,28 +74,33 @@ class LinkedList {
     if (!this.head) {
       return;
     }
-
+    //if there is only one Node
     if (!this.head.next) {
       this.head = null;
       return;
     }
 
-    const previous = this.head;
-    const node = this.head.next;
-
+    let previous = this.head;
+    let node = this.head.next;
+    //as long as Node has "next" property, whick means indicating the next Node
     while (node.next) {
+      //assign the previous Node to the next one
       previous = node;
       node = node.next;
     }
+    //after finding the last one, remove it!
     previous.next = null;
   }
 
   insertLast(data) {
+    //use the function whick returns the last Node
     const last = this.getLast();
-
+    //if it exists
     if (last) {
-      last.next = new node(data);
+      //insert the new Node after the last one
+      last.next = new Node(data);
     } else {
+      //otherwise insert the new Node as a first Node
       this.head = new Node(data);
     }
   }
@@ -102,8 +108,9 @@ class LinkedList {
   getAt(index) {
     let node = this.head;
     let counter = 0;
-
+    //loop through all the Nodes
     while (node) {
+      //and add counter by "1" by each Node,                                                                                          and if there is a match between given index and node return that Node!!!
       if (counter === index) {
         return node;
       }
@@ -111,8 +118,46 @@ class LinkedList {
       counter++;
       node = node.next;
     }
-
+    //if the head is empty return 'null'
     return null;
+  }
+
+  removeAt(index) {
+    if (!this.head) {
+      return null;
+    }
+
+    if (index === 0) {
+      //refer the head to the second Node when the index is '0', which means the first one!!!
+      this.head = this.head.next;
+      return;
+    }
+
+    const previous = this.getAt(index - 1);
+    //if there is not previuos Node and current Node return nothing!!!
+    if (!previous || !previous.next) {
+      return;
+    }
+    //remove the current Node
+    previous.next = previous.next.next;
+  }
+
+  insertAt(data, index) {
+    if (!this.head) {
+      this.head = new Node(data);
+      return;
+    }
+
+    if (index === 0) {
+      this.head = new Node(data, this.head);
+      return;
+    }
+    //if one of following functions return true, assign it to 'previous' variable
+    const previous = this.getAt(index - 1) || this.getLast();
+    //create a new Node
+    const node = new Node(data, previous.next);
+    //and insert it after the 'previous' variable                                                                                 (in this case it can be the last Node or the one before given index)
+    previous.next = node;
   }
 }
 
