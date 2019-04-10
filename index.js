@@ -110,7 +110,7 @@ class LinkedList {
     let counter = 0;
     //loop through all the Nodes
     while (node) {
-      //and add counter by "1" by each Node,                                                                                          and if there is a match between given index and node return that Node!!!
+      //and add counter by "1" by each Node, and if there is a match between given index and node return that Node!!!
       if (counter === index) {
         return node;
       }
@@ -156,7 +156,7 @@ class LinkedList {
     const previous = this.getAt(index - 1) || this.getLast();
     //create a new Node
     const node = new Node(data, previous.next);
-    //and insert it after the 'previous' variable                                                                                 (in this case it can be the last Node or the one before given index)
+    //and insert it after the 'previous' variable (in this case it can be the last Node or the one before given index)
     previous.next = node;
   }
 }
